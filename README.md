@@ -1,5 +1,4 @@
-history-of-a-thriving-codebase
-==============================
+# History of a Thriving Code Base
 
 The Git book all your friends will be talking about
 
