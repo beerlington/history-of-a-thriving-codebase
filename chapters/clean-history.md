@@ -18,9 +18,11 @@ Every time you commit, you're creating a new snapshot of your codebase. You can 
 
 ## What is a Commit?
 
-With Git, a commit is literally a snapshot of your code, not just the changes. You can roll back in time to any previous snapshot without losing your work (more on this later). It's easy to think about a commit as just being the change to the *code*, however, it is really about the code change *and* the commit message.
+With Git, a commit is literally a snapshot of your entire codebase, not just the changes. You can roll back in time to any previous snapshot without losing your work (more on this later). It's easy to think about a commit as just being the change to the *code*; however, it is really about the code change *and* the commit message.
 
-Commits can be something as simple as fixing a typo or refactoring a chunk of code. It might be to update some documentation for existing code, without actually changing any code. Or even adding a new feature.
+Commits can be something as simple as fixing a typo or refactoring a chunk of code. It might be an update to some documentation for existing code, without actually changing any code. A commit may be as significant as adding a new feature.
+
+A commit, in Git, contains the following: a unique SHA-1 hash, the author of the commit, the date of the commit, a commit message and what was changed in the commit. Each part of the commit plays an important role in creating a code base with a clean history.
 
 ## What is Clean History?
 
