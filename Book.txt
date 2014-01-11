@@ -6,3 +6,4 @@ preface.md
 mainmatter:
 clean-history.md
 why-version-control.md
+tools-for-a-clean-history.md
