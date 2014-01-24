@@ -1,0 +1,8 @@
+cover
+frontmatter:
+maketitle
+tableofcontents
+preface.md
+mainmatter:
+clean-history.md
+why-version-control.md
