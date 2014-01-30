@@ -415,7 +415,7 @@ Date:   Fri Jan 17 08:38:14 2014 -0500
 ```
 \end{codelisting}
  
-There is one important thing to note about the output above, which is that the commit SHA is different before and after we amended the commit. What this means is that while the author, date, and code changes are exactly the same, it is infact a new commit. As with rebasing, any time there's a new commit, the history has effectively been rewritten. We discuss the implications of this in following tip section.
+There is one important thing to note about the output above, which is that the commit SHA is different before and after we amended the commit. What this means is that while the author, date, and code changes are exactly the same, it is in fact a new commit. As with rebasing, any time there's a new commit, the history has effectively been rewritten. We discuss the implications of this in following tip section.
 
 ### Protips for Clean Up
 
@@ -455,30 +455,46 @@ Even seasoned professionals get rebasing wrong on occasion, yet despite how scar
 
 ## Merging
 
-### Basics of merging
+Merging is the final step of every development workflow. It's where all your hard work comes to an end and you're ready for your work to be seen by the world (or your coworkers).
 
+Before you merge your branch, you need to decide whether you want to introduce a merge commit or not. There are various arguments in favor of both sides, so we're going to discuss how they relate to a clean history to help you decide.
+
+Merge commits offer two main benefits with respect to having a clean history. The first is that they allow you to revert multiple branch commits at once. The second is that they provide an exact point in time where the branch was merged into master.
+
+### Merge Commit
+
+If you merge a branch using GitHub's pull request feature, you don't have a choice about whether a merge commit is added since they are *always* created. The argument in favor of this behavior is that the merge commit links to the pull request, and code review discussions become first class citizens in your process. These discussions can act as additional documentation about why things were done a certain way, and give insight into what the developers were thinking at the time it was reviewed and merged.
+
+If you're not using GitHub for merging branches, you'll lose the benefit of the code review discussions, but can still create a merge commit when desired. In order to manually create a merge commit, you need to specify the `--no-ff` option when merging.
+
+Say we have a branch called "new-feature" that is ready to merge into master....
 
 ```text
 $ git checkout master
-$ git merge my_branch --no-ff
-$ git branch -d my_branch
+$ git pull
+$ git merge new-feature --no-ff
 ```
 
-### Resolving Merge Conflicts
+After the merge command is entered, your text editor will open, allowing you to specify a custom message for the merge commit. Unless you have a specific reason for the merge commit, using the default message is fine.
+
+\begin{codelisting}
+\codecaption{}
+\label{code:merge-commit-message}
+```text
+Merge branch 'new-feature'
+
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+```
+\end{codelisting}
+
+After saving and closing the window, Git will report some info about the commit:
 
 ```text
-C1 → C2 → C3 → C4 → C5 → C6* → C7 (master)
-                 ↘︎
-                  C1' → C2'* → C3' (my_branch)
+Merge made by the 'recursive' strategy.
+ README.txt | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 ```
-In the illustration above, commits C6* AD C2'* have divergent changes to the same file, and Git cannot resolve the changes automatically, leading to what's known as a merge conflict. You have two options at this point: 1) Merge master into my_branch, and resolve the conflict, resulting in a merge commit, or 2) rebase so that your branch thinks that it branched off commit C7 instead of C4. You will still need to resolve the merge conflict in this case, however a merge commit will not be introduced. The following section discusses the ins and outs of merge conflicts, so don't worry if this concept is foreign to you.
-
-You will be left with a structure that looks like this:
-
-```
-C1 → C2 → C3 → C4 → C5 → C6 → C7 (master)
-                                ↘︎
-                                 C1' → C2' → C3' (my_branch)
-```
-
-At this point, you can merge your branch back into master without needing to resolve the conflict again.

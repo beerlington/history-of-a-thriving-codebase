@@ -7,3 +7,4 @@ mainmatter:
 clean-history.md
 why-version-control.md
 tools-for-a-clean-history.md
+when-things-go-wrong.md
