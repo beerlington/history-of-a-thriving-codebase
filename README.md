@@ -8,7 +8,7 @@ The Git book all your friends will be talking about
 1. Intro
 2. Why Version Control (What is it Really)?
 3. Clean History
-4. Types of Commits
+4. Commits
 5. Tools for a Clean History
 6. Workflows
 7. What We Can Do With a Clean History
